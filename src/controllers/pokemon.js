@@ -1,5 +1,5 @@
-import HttpError from "http-errors";
 import {getDataByName, searchInList} from "../services/pokemon";
+import HttpError from "http-errors";
 import httpStatus from "http-status";
 
 /**
@@ -14,9 +14,9 @@ export const pokemonController = async (req, res) => {
   try {
     if (!name) throw new HttpError.BadRequest();
     const pokemons = await searchInList(req.httpClient, name);
-    // const response = await getDataByName(req.httpClient, name);
+    // const response = await getDataByName(req.httpClient, name); //to get more data for item
 
-    res.status(200).json({pokemons});
+    res.status(httpStatus.OK).json({pokemons});
   } catch (error) {
     res.status(error.status || httpStatus.INTERNAL_SERVER_ERROR).json({
       message: error.message || httpStatus[500]

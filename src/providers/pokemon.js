@@ -1,11 +1,11 @@
-import {BASE_URLs} from '../utils/URLs';
+import {getBaseURL} from '../utils/URLs';
 
-const POKE_ENDPOINT = `${BASE_URLs.get('POKEMON_API')}/pokemon`;
+const POKE_ENDPOINT = `${getBaseURL('POKEMON_API')}/pokemon`;
 /**
  * @name getPokemonByName
  * @description fetch data about pokemon like abilities, form and another features.
- * @param  {} httpClient
- * @param  {} searchKey
+ * @param  {object} httpClient
+ * @param  {string} searchKey
  */
 export const getPokemonByName = (httpClient, searchKey) => 
   httpClient.get(`${POKE_ENDPOINT}/${searchKey}`);

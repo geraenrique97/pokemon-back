@@ -1,4 +1,4 @@
-import {getPokemonByName, getPokemonList} from "../providers/pokemon";
+import {getPokemonByName, getPokemonList} from '../providers/pokemon';
 /**
  * @name getDataByName
  * @description get data about pokemon given a name

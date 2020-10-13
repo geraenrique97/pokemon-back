@@ -1,4 +1,5 @@
 import {getPokemonByName, getPokemonList} from '../providers/pokemon';
+import {normalizeString} from '../utils/helpers';
 /**
  * @name getDataByName
  * @description get data about pokemon given a name
@@ -7,8 +8,16 @@ import {getPokemonByName, getPokemonList} from '../providers/pokemon';
  * @return {object}
  */
 export const getDataByName = async (httpClient, name) => {
-  const {data} = await getPokemonByName(httpClient, name);
-  return data;
+  const {
+    data:
+    {
+      sprites: {
+        front_default
+      }
+    }
+  } = await getPokemonByName(httpClient, name);
+  const normalizedName = normalizeString(name);
+  return {img: front_default, normalizedName};
 };
 
 /**

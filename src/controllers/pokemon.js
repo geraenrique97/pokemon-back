@@ -14,9 +14,13 @@ export const pokemonController = async (req, res) => {
   try {
     if (!name) throw new HttpError.BadRequest();
     const pokemons = await searchInList(req.httpClient, name);
-    // const response = await getDataByName(req.httpClient, name); //to get more data for item
+    let results = [];
+    for (const pokemon of pokemons) {
+      const data = await getDataByName(req.httpClient, pokemon.name);
+      results = [...results, {...pokemon, ...data}];
+    }
 
-    res.status(httpStatus.OK).json({pokemons});
+    res.status(httpStatus.OK).json({pokemons: results});
   } catch (error) {
     res.status(error.status || httpStatus.INTERNAL_SERVER_ERROR).json({
       message: error.message || httpStatus[500]
